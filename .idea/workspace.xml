@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="" />
+    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="docs: README.md updated">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +23,8 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -35,30 +39,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "JUnit.CommentServiceTest.executor": "Run",
-    "JUnit.CommentServiceTest.testCreateComment.executor": "Run",
-    "JUnit.CommentServiceTest.testGetComment.executor": "Run",
-    "Maven.uptodate [clean].executor": "Run",
-    "Maven.uptodate [compile].executor": "Run",
-    "Maven.uptodate [install].executor": "Run",
-    "Maven.uptodate [package].executor": "Run",
-    "Maven.uptodate [test].executor": "Run",
-    "Maven.uptodate [validate].executor": "Run",
-    "Maven.uptodate [verify].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Artemii/IdeaProjects/Uptodate",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.testCreateComment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.testGetComment.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.uptodate [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.uptodate [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.uptodate [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.uptodate [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.uptodate [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.uptodate [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.uptodate [verify].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Artemii/IdeaProjects/Uptodate&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Artemii\IdeaProjects\Uptodate\src\main\java\me\artemiyulyanov\uptodate" />
@@ -148,6 +152,19 @@
       <option name="presentableId" value="Default" />
       <updated>1740134455922</updated>
     </task>
+    <task id="LOCAL-00001" summary="docs: README.md updated">
+      <option name="closed" value="true" />
+      <created>1742772723990</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742772723990</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="docs: README.md updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: README.md updated" />
   </component>
 </project>
