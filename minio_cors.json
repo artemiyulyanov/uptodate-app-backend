@@ -1,0 +1,9 @@
+[
+  {
+    "AllowedOrigins": ["*"],
+    "AllowedMethods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "AllowedHeaders": ["*"],
+    "ExposedHeaders": ["X-Amz-Request-Id", "X-Amz-Id-2", "x-amz-version-id"],
+    "MaxAgeSeconds": 3000
+  }
+]
