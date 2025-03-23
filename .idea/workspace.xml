@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="" />
+    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="chore: re-initialization of the GitHub repository">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +23,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ArtemiyUlyanov"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ArtemiyUlyanov/uptodate-app-backend.git",
+    "accountId": "7ff6eb7c-e550-47c2-8130-96390383db40"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -53,7 +68,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Artemii/IdeaProjects/Uptodate",
+    "last_opened_file_path": "C:/Users/Artemii/IdeaProjects/Uptodate/src/main/java/me/artemiyulyanov/uptodate/configuration",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -73,7 +88,7 @@
       <module name="uptodate" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="me.artemiyulyanov.uptodate.*" />
+          <option name="PATTERN" value="me.artemiyulyanov.uptodate.configuration.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -88,7 +103,7 @@
       <module name="uptodate" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="me.artemiyulyanov.uptodate.*" />
+          <option name="PATTERN" value="me.artemiyulyanov.uptodate.configuration.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -104,7 +119,7 @@
       <module name="uptodate" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="me.artemiyulyanov.uptodate.*" />
+          <option name="PATTERN" value="me.artemiyulyanov.uptodate.configuration.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -148,6 +163,30 @@
       <option name="presentableId" value="Default" />
       <updated>1740134455922</updated>
     </task>
+    <task id="LOCAL-00001" summary="chore: re-initialization of the GitHub repository">
+      <option name="closed" value="true" />
+      <created>1742771223475</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742771223475</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: re-initialization of the GitHub repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: re-initialization of the GitHub repository" />
   </component>
 </project>
