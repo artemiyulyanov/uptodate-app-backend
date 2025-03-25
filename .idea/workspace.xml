@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="docs: README.md updated">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_24_2025_2_32_AM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_24_2025_2_32_AM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/solr/SolrDataInitializationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/solr/models/SolrArticle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/solr/services/SolrArticleRepository.java" afterDir="false" />
+    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="refactor: ArticleService.java resource manager initialization updated">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/faq/FaqController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/resources/FaqResourceManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/FaqItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/FaqSection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/repositories/FaqItemRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/repositories/FaqSectionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/FaqService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/AsyncConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/resources/ArticleResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/resources/ArticleResourceManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,12 +204,39 @@
       <option name="project" value="LOCAL" />
       <updated>1742773022631</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="style: ArticleRepository.java updated (some comments to delete)">
+      <option name="closed" value="true" />
+      <created>1742927437017</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742927437017</updated>
+    </task>
+    <task id="LOCAL-00006" summary="chore: docker-compose.yml updated by deleting zookeeper, kafka and solr containers">
+      <option name="closed" value="true" />
+      <created>1742928120344</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742928120344</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refactor: ArticleService.java resource manager initialization updated">
+      <option name="closed" value="true" />
+      <created>1742938365091</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742938365091</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: re-initialization of the GitHub repository" />
     <MESSAGE value="docs: README.md updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: README.md updated" />
+    <MESSAGE value="style: ArticleRepository.java updated (some comments to delete)" />
+    <MESSAGE value="chore: docker-compose.yml updated by deleting zookeeper, kafka and solr containers" />
+    <MESSAGE value="refactor: ArticleService.java resource manager initialization updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: ArticleService.java resource manager initialization updated" />
   </component>
 </project>

@@ -1,18 +1,20 @@
 package me.artemiyulyanov.uptodate.minio.resources;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import me.artemiyulyanov.uptodate.minio.MinioService;
 import me.artemiyulyanov.uptodate.models.Article;
 import me.artemiyulyanov.uptodate.models.ContentBlock;
+import me.artemiyulyanov.uptodate.models.FaqItem;
 import me.artemiyulyanov.uptodate.repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -22,8 +24,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Component
 @Builder
-public class ArticleResourceManager implements ResourceManager<Article> {
-    public static final String RESOURCES_FOLDER = "articles/%d";
+public class FaqResourceManager implements ResourceManager<FaqItem> {
+    public static final String RESOURCES_FOLDER = "faq_items/%d";
 
     @Autowired
     private MinioService minioService;
@@ -32,10 +34,10 @@ public class ArticleResourceManager implements ResourceManager<Article> {
     private ObjectMapper objectMapper;
 
     @Override
-    public List<String> uploadResources(Article article, List<MultipartFile> files) {
+    public List<String> uploadResources(FaqItem item, List<MultipartFile> files) {
         if (files != null) {
             return files.stream()
-                    .map(file -> minioService.uploadFile(getResourceFolder(article) + File.separator + file.getOriginalFilename(), file))
+                    .map(file -> minioService.uploadFile(getResourceFolder(item) + File.separator + file.getOriginalFilename(), file))
                     .toList();
         }
 
@@ -43,12 +45,12 @@ public class ArticleResourceManager implements ResourceManager<Article> {
     }
 
     @Override
-    public List<String> updateResources(Article article, List<MultipartFile> files) {
-        deleteResources(article);
+    public List<String> updateResources(FaqItem item, List<MultipartFile> files) {
+        deleteResources(item);
 
         if (files != null) {
             return files.stream()
-                    .map(file -> minioService.uploadFile(getResourceFolder(article) + File.separator + file.getOriginalFilename(), file))
+                    .map(file -> minioService.uploadFile(getResourceFolder(item) + File.separator + file.getOriginalFilename(), file))
                     .toList();
         }
 
@@ -56,29 +58,19 @@ public class ArticleResourceManager implements ResourceManager<Article> {
     }
 
     @Override
-    public void deleteResources(Article article, List<String> filesNames) {
-        filesNames.forEach(fileName -> minioService.deleteFile(getResourceFolder(article) + File.separator + fileName));
+    public void deleteResources(FaqItem item, List<String> filesNames) {
+        filesNames.forEach(fileName -> minioService.deleteFile(getResourceFolder(item) + File.separator + fileName));
     }
 
     @Override
-    public void deleteResources(Article article) {
-        if (minioService.folderExists(getResourceFolder(article))) minioService.deleteFolder(getResourceFolder(article));
+    public void deleteResources(FaqItem item) {
+        if (minioService.folderExists(getResourceFolder(item))) minioService.deleteFolder(getResourceFolder(item));
     }
 
-    @Override
-    public String getResourceFolder(Article article) {
-        return String.format(RESOURCES_FOLDER, article.getId());
-    }
-
-    @Override
-    public List<String> getResources(Article article) {
-        return minioService.getFolder(getResourceFolder(article));
-    }
-
-    public List<ContentBlock> uploadContent(Article article, List<ContentBlock> contentBlocks, List<MultipartFile> resources) {
+    public List<ContentBlock> uploadContent(FaqItem item, List<ContentBlock> contentBlocks, List<MultipartFile> resources) {
         AtomicInteger index = new AtomicInteger(0);
 
-        List<String> resourcesUrls = uploadResources(article, resources);
+        List<String> resourcesUrls = uploadResources(item, resources);
 
         return contentBlocks.stream()
                 .map(contentBlock -> {
@@ -92,8 +84,13 @@ public class ArticleResourceManager implements ResourceManager<Article> {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public String uploadCover(Article article, MultipartFile cover) {
-        if (cover == null) return article.getCover();
-        return uploadResources(article, List.of(cover)).stream().findFirst().orElse(null);
+    @Override
+    public String getResourceFolder(FaqItem item) {
+        return String.format(RESOURCES_FOLDER, item.getId());
+    }
+
+    @Override
+    public List<String> getResources(FaqItem item) {
+        return minioService.getFolder(getResourceFolder(item));
     }
 }
