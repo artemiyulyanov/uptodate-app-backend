@@ -16,9 +16,6 @@ import java.util.Optional;
 @RequestMapping("/api/categories")
 public class CategoryController {
     @Autowired
-    private ArticleService articleService;
-
-    @Autowired
     private CategoryService categoryService;
 
     @Autowired
