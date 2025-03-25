@@ -4,26 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="refactor: non-used DI-objects deleted">
+    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="refactor: methods names updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/AuthenticatedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/AuthenticatedController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/articles/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/articles/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/articles/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/articles/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/articles/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/articles/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/auth/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/auth/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/files/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/files/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/users/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/users/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/Article.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/UserStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/UserStatistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/ArticleLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/ArticleLikeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/ArticleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/ArticleViewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/ArticleViewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/CommentLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/CommentLikeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742941225862</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="refactor: methods names updated">
+      <option name="closed" value="true" />
+      <created>1742941918082</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1742941918082</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -284,6 +274,7 @@
     <MESSAGE value="feat: FAQ database entities and endpoints embedded" />
     <MESSAGE value="feat: password updating logic changed" />
     <MESSAGE value="refactor: non-used DI-objects deleted" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: non-used DI-objects deleted" />
+    <MESSAGE value="refactor: methods names updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: methods names updated" />
   </component>
 </project>
