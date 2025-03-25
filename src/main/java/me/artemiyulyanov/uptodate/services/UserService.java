@@ -158,7 +158,10 @@ public class UserService implements UserDetailsService, ResourceService<UserReso
     }
 
     @Transactional
-    public User updatePassword(User user, String password) {
+    public User updatePassword(String email, String password) {
+        User user = userRepository.findByEmail(email).orElse(null);
+        if (user == null) return null;
+
         user.setPassword(passwordEncoder.encode(password));
         return userRepository.save(user);
     }

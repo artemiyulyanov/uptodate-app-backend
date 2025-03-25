@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="refactor: ArticleService.java resource manager initialization updated">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/faq/FaqController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/resources/FaqResourceManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/FaqItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/FaqSection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/repositories/FaqItemRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/repositories/FaqSectionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/FaqService.java" afterDir="false" />
+    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="feat: FAQ database entities and endpoints embedded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/resources/ArticleResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/resources/ArticleResourceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/services/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,8 +222,27 @@
       <option name="project" value="LOCAL" />
       <updated>1742938365091</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat: FAQ database entities and endpoints embedded">
+      <option name="closed" value="true" />
+      <created>1742940217280</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742940217280</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: re-initialization of the GitHub repository" />
@@ -237,6 +250,7 @@
     <MESSAGE value="style: ArticleRepository.java updated (some comments to delete)" />
     <MESSAGE value="chore: docker-compose.yml updated by deleting zookeeper, kafka and solr containers" />
     <MESSAGE value="refactor: ArticleService.java resource manager initialization updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: ArticleService.java resource manager initialization updated" />
+    <MESSAGE value="feat: FAQ database entities and endpoints embedded" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: FAQ database entities and endpoints embedded" />
   </component>
 </project>
