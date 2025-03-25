@@ -161,8 +161,8 @@ public class ArticleService implements ResourceService<ArticleResourceManager> {
     public ArticleResourceManager getResourceManager() {
         return ArticleResourceManager
                 .builder()
-                .articleRepository(articleRepository)
                 .minioService(minioService)
+                .objectMapper(objectMapper)
                 .build();
     }
 }
