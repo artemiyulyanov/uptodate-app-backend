@@ -20,7 +20,4 @@ import java.util.Optional;
 public interface ArticleRepository extends JpaRepository<Article, Long>, JpaSpecificationExecutor<Article> {
     List<Article> findByAuthor(User author);
     Optional<Article> findBySlug(String slug);
-
-//    @Query("SELECT a FROM Article a WHERE a.author = :user AND a.createdAt >= :after")
-//    List<Article> findArticlesByAuthorAfterDate(@Param("user") User user, @Param("after") LocalDateTime after);
 }
