@@ -62,7 +62,7 @@ public class Comment {
     @PrePersist
     private void initResources() {
         if (userService != null) {
-            User wrappedUser = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).orElse(null);
+            User wrappedUser = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).orElse(null);
             this.permissionScope = definePermissionScopeFor(this, wrappedUser);
         }
     }

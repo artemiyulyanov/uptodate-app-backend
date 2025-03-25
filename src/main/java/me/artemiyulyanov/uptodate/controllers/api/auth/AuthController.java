@@ -59,7 +59,7 @@ public class AuthController extends AuthenticatedController {
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
-        Optional<User> wrappedUser = userService.findByUsername(username);
+        Optional<User> wrappedUser = userService.getUserByUsername(username);
         UserDetails userDetails = userService.loadUserByUsername(username);
 
         String accessToken = jwtUtil.generateAccessToken(userDetails);
@@ -110,7 +110,7 @@ public class AuthController extends AuthenticatedController {
         RegisterRequest registerRequest = mailConfirmationCode.getCredential("registerRequest").getValue(RegisterRequest.class);
 
         mailService.enterCode(email, code, MailConfirmationCode.MailScope.REGISTRATION);
-        User user = userService.create(registerRequest.getEmail(), registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getFirstName(), registerRequest.getLastName());
+        User user = userService.createUser(registerRequest.getEmail(), registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getFirstName(), registerRequest.getLastName());
 
         UserDetails userDetails = userService.loadUserByUsername(user.getUsername());
         String accessToken = jwtUtil.generateAccessToken(userDetails);

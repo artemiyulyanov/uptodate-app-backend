@@ -23,13 +23,13 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<?> getAllCategories() {
-        List<Category> categories = categoryService.findAll();
+        List<Category> categories = categoryService.getAllCategories();
         return requestService.executeEntityResponse(HttpStatus.OK, "The request has been proceeded successfully!", categories);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
-        Optional<Category> wrappedCategory = categoryService.findById(id);
+        Optional<Category> wrappedCategory = categoryService.getCategoryById(id);
 
         if (wrappedCategory.isEmpty()) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "Article category is undefined!");

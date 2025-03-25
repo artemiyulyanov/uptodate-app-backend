@@ -36,12 +36,5 @@ public class ImageController {
     public ResponseEntity<?> getImage(@RequestParam String path, Model model) {
         String url = amazonS3.getUrl("photos", "articles/1/icon.png").toString();
         return requestService.executeEntityResponse(HttpStatus.OK, "", url);
-//        MinioMediaFile mediaFile = minioService.getMediaFile(path);
-//
-//        try (InputStream inputStream = mediaFile.getInputStream()) {
-//            return requestService.executeMediaResponse(HttpStatus.OK, mediaFile.getMediaType(), inputStream.readAllBytes());
-//        } catch (Exception e) {
-//            return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "Unable to return image!");
-//        }
     }
 }

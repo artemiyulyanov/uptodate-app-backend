@@ -132,19 +132,19 @@ public class CategoryService {
         categoryRepository.saveAll(categories);
     }
 
-    public List<Category> findAll() {
+    public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
 
-    public Optional<Category> findById(Long id) {
+    public Optional<Category> getCategoryById(Long id) {
         return categoryRepository.findById(id);
     }
 
-    public List<Category> findByParent(String parent) {
+    public List<Category> getCategoryByParent(String parent) {
         return categoryRepository.findByParentInEnglishOrRussian(parent);
     }
 
-    public Optional<Category> findByName(String name) {
+    public Optional<Category> getCategoryByName(String name) {
         return categoryRepository.findByNameInEnglishOrRussian(name);
     }
 }

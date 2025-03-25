@@ -88,14 +88,14 @@ public class AccountController extends AuthenticatedController {
             return requestService.executeApiResponse(HttpStatus.CONFLICT, "The username is already taken!");
         }
 
-        User updatedUser = userService.edit(user.getId(), username, firstName, lastName, settings);
+        User updatedUser = userService.editUser(user.getId(), username, firstName, lastName, settings);
         return requestService.executeEntityResponse(HttpStatus.OK, "The changes have been applied successfully!", updatedUser);
     }
 
     @DeleteMapping
     public ResponseEntity<?> deleteAccount() {
         User user = getAuthorizedUser().get();
-        userService.delete(user);
+        userService.deleteUser(user);
 
         return requestService.executeApiResponse(HttpStatus.OK, "The user has been deleted successfully!");
     }

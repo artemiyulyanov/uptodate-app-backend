@@ -22,7 +22,7 @@ public class CommentLikeService {
     private CommentService commentService;
 
     @Transactional
-    public Comment like(Comment comment, User user) {
+    public Comment likeComment(Comment comment, User user) {
         List<CommentLike> likes = comment.getLikes();
         boolean alreadyLiked = likes.stream().anyMatch(like -> like.getUser().getId().equals(user.getId()));
 
@@ -40,10 +40,10 @@ public class CommentLikeService {
         }
 
         comment.setLikes(likes);
-        return commentService.save(comment);
+        return commentService.saveComment(comment);
     }
 
-    public List<CommentLike> findLastLikesOfAuthor(User user, LocalDateTime after) {
+    public List<CommentLike> getLastLikesOfAuthor(User user, LocalDateTime after) {
         return commentLikeRepository.findLastLikesOfAuthor(user, after);
     }
 }

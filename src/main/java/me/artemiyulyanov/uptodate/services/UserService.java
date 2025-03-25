@@ -74,28 +74,24 @@ public class UserService implements UserDetailsService, ResourceService<UserReso
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 
-    public boolean userExistsByEmail(String email) {
-        return userRepository.existsByEmail(email);
-    }
-
-    public Optional<User> findByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public Optional<User> findById(Long id) {
+    public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public List<User> findAllById(List<Long> ids) {
+    public List<User> getAllUsers(List<Long> ids) {
         return userRepository.findAllById(ids);
     }
 
     @Transactional
-    public User create(String email, String username, String password, String firstName, String lastName) {
+    public User createUser(String email, String username, String password, String firstName, String lastName) {
         User user = User.builder()
                 .email(email)
                 .username(username)
@@ -111,7 +107,7 @@ public class UserService implements UserDetailsService, ResourceService<UserReso
     }
 
     @Transactional
-    public User edit(Long id, String username, String firstName, String lastName, UserSettings settings) {
+    public User editUser(Long id, String username, String firstName, String lastName, UserSettings settings) {
         User newUser = userRepository.findById(id).get();
 
         newUser.setUsername(username);
@@ -121,17 +117,13 @@ public class UserService implements UserDetailsService, ResourceService<UserReso
         settings.setUser(newUser);
         newUser.setSettings(settings);
 
-//        String iconObjectKey = getResourceManager().getResourceFolder(newUser) + File.separator + icon.getOriginalFilename();
-//        getResourceManager().updateResources(newUser, List.of(icon));
-//
-//        newUser.setIcon(iconObjectKey);
         return userRepository.save(newUser);
     }
 
     @Transactional
-    public void delete(User user) {
+    public void deleteUser(User user) {
         List<Article> articles = user.getArticles();
-        articleService.deleteAll(articles);
+        articleService.deleteArticles(articles);
         userRepository.delete(user);
     }
 
@@ -190,7 +182,7 @@ public class UserService implements UserDetailsService, ResourceService<UserReso
     }
 
     @Transactional
-    public void save(User user) {
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 

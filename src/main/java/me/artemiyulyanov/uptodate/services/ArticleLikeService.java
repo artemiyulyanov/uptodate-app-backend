@@ -23,7 +23,7 @@ public class ArticleLikeService {
     private ArticleService articleService;
 
     @Transactional
-    public Article like(Article article, User user) {
+    public Article likeArticle(Article article, User user) {
         List<ArticleLike> likes = article.getLikes();
         boolean alreadyLiked = likes.stream().anyMatch(like -> like.getUser().getId().equals(user.getId()));
 
@@ -41,11 +41,11 @@ public class ArticleLikeService {
         }
 
         article.setLikes(likes);
-        return articleService.save(article);
+        return articleService.saveArticle(article);
     }
 
     @Transactional(readOnly = true)
-    public List<ArticleLike> findLastLikesOfAuthor(User user, LocalDateTime after) {
+    public List<ArticleLike> getLastLikesOfAuthor(User user, LocalDateTime after) {
         return articleLikeRepository.findLastLikesOfAuthor(user, after);
     }
 }

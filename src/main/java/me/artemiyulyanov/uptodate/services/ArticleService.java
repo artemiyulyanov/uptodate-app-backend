@@ -30,10 +30,6 @@ public class ArticleService implements ResourceService<ArticleResourceManager> {
 
     @Autowired
     @Lazy
-    private UserService userService;
-
-    @Autowired
-    @Lazy
     private CategoryService categoryService;
 
     @Autowired
@@ -49,39 +45,39 @@ public class ArticleService implements ResourceService<ArticleResourceManager> {
         return articleRepository.count();
     }
 
-    public List<Article> findAllArticles(Sort sort) {
+    public List<Article> getAllArticles(Sort sort) {
         return articleRepository.findAll(sort);
     }
 
-    public List<Article> findAllById(List<Long> ids) {
+    public List<Article> getAllArticles(List<Long> ids) {
         return articleRepository.findAllById(ids);
     }
 
-    public Page<Article> findAllArticles(PageableObject<Article> pageableObject) {
+    public Page<Article> getAllArticles(PageableObject<Article> pageableObject) {
         return articleRepository.findAll(pageableObject.getCommonSpecification(), pageableObject.getPageable());
     }
 
-    public Page<Article> findAllArticles(PageRequest pageRequest) {
+    public Page<Article> getAllArticles(PageRequest pageRequest) {
         return articleRepository.findAll(pageRequest);
     }
 
-    public Optional<Article> findById(Long id) {
+    public Optional<Article> getArticleById(Long id) {
         return articleRepository.findById(id);
     }
 
-    public Optional<Article> findBySlug(String slug) {
+    public Optional<Article> getArticleBySlug(String slug) {
         return articleRepository.findBySlug(slug);
     }
 
-    public List<Article> findByAuthor(User author) {
+    public List<Article> getArticleByAuthor(User author) {
         return articleRepository.findByAuthor(author);
     }
 
     @Transactional
-    public Article create(User author, String heading, String description, String content, List<String> categoriesNames, MultipartFile cover, List<MultipartFile> resources) {
+    public Article createArticle(User author, String heading, String description, String content, List<String> categoriesNames, MultipartFile cover, List<MultipartFile> resources) {
         try {
             Set<Category> categories = categoriesNames.stream()
-                    .map(categoryService::findByName)
+                    .map(categoryService::getCategoryByName)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .collect(Collectors.toSet());
@@ -111,11 +107,11 @@ public class ArticleService implements ResourceService<ArticleResourceManager> {
     }
 
     @Transactional
-    public Article edit(Long id, String heading, String description, String content, List<String> categoriesNames, MultipartFile cover, List<MultipartFile> resources) {
+    public Article editArticle(Long id, String heading, String description, String content, List<String> categoriesNames, MultipartFile cover, List<MultipartFile> resources) {
         try {
             Article newArticle = articleRepository.findById(id).get();
             Set<Category> categories = categoriesNames.stream()
-                    .map(categoryService::findByName)
+                    .map(categoryService::getCategoryByName)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .collect(Collectors.toSet());
@@ -137,23 +133,23 @@ public class ArticleService implements ResourceService<ArticleResourceManager> {
     }
 
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
     }
 
     @Transactional
-    public void delete(Article article) {
+    public void deleteArticle(Article article) {
         getResourceManager().deleteResources(article);
         articleRepository.delete(article);
     }
 
     @Transactional
-    public void deleteAll(List<Article> articles) {
+    public void deleteArticles(List<Article> articles) {
         articleRepository.deleteAll(articles);
     }
 
     @Transactional
-    public Article save(Article article) {
+    public Article saveArticle(Article article) {
         return articleRepository.save(article);
     }
 

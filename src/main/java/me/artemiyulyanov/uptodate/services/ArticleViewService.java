@@ -46,7 +46,7 @@ public class ArticleViewService {
     }
 
     @Transactional(readOnly = true)
-    public List<ArticleView> findLastViewsOfAuthor(User user, LocalDateTime after) {
+    public List<ArticleView> getLastViewsOfAuthor(User user, LocalDateTime after) {
         return articleViewRepository.findLastViewsOfAuthor(user, after);
     }
 }

@@ -23,10 +23,6 @@ public class CommentService implements ResourceService<CommentResourceManager> {
     private CommentRepository commentRepository;
 
     @Autowired
-    @Lazy
-    private UserService userService;
-
-    @Autowired
     private CategoryService categoryService;
 
     @Autowired
@@ -35,24 +31,24 @@ public class CommentService implements ResourceService<CommentResourceManager> {
     @Autowired
     private ObjectMapper objectMapper;
 
-    public Optional<Comment> findById(Long id) {
+    public Optional<Comment> getCommentById(Long id) {
         return commentRepository.findById(id);
     }
 
-    public List<Comment> findAllById(List<Long> ids) {
+    public List<Comment> getAllComments(List<Long> ids) {
         return commentRepository.findAllById(ids);
     }
 
-    public List<Comment> findByArticle(Article article) {
+    public List<Comment> getCommentByArticle(Article article) {
         return commentRepository.findByArticle(article);
     }
 
-    public List<Comment> findByAuthor(User author) {
+    public List<Comment> getCommentByAuthor(User author) {
         return commentRepository.findByAuthor(author);
     }
 
     @Transactional
-    public Comment create(String content, User author, Article article, List<MultipartFile> resources) {
+    public Comment createComment(String content, User author, Article article, List<MultipartFile> resources) {
         Comment comment = Comment.builder()
                 .content(content)
                 .createdAt(LocalDateTime.now())
@@ -68,7 +64,7 @@ public class CommentService implements ResourceService<CommentResourceManager> {
     }
 
     @Transactional
-    public Comment edit(Long id, String content, List<MultipartFile> resources) {
+    public Comment editComment(Long id, String content, List<MultipartFile> resources) {
         Comment newComment = commentRepository.findById(id).get();
 
         newComment.setContent(content);
@@ -79,13 +75,13 @@ public class CommentService implements ResourceService<CommentResourceManager> {
     }
 
     @Transactional
-    public void delete(Comment comment) {
+    public void deleteComment(Comment comment) {
         getResourceManager().deleteResources(comment);
         commentRepository.delete(comment);
     }
 
     @Transactional
-    public Comment save(Comment comment) {
+    public Comment saveComment(Comment comment) {
         return commentRepository.save(comment);
     }
 

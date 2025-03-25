@@ -34,8 +34,8 @@ public class UserStatistics {
     @Builder
     public UserStatistics(User user) {
         this.user = user;
-        this.lastViews = articleViewService.findLastViewsOfAuthor(user, LocalDateTime.now().minusDays(1));
-        this.lastLikes = articleLikeService.findLastLikesOfAuthor(user, LocalDateTime.now().minusDays(1));
+        this.lastViews = articleViewService.getLastViewsOfAuthor(user, LocalDateTime.now().minusDays(1));
+        this.lastLikes = articleLikeService.getLastLikesOfAuthor(user, LocalDateTime.now().minusDays(1));
     }
 
     public Long getUserId() {

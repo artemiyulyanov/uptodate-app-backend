@@ -36,13 +36,13 @@ public class UserController extends AuthenticatedController {
 
     @GetMapping
     public ResponseEntity<?> getUsersByIds(@RequestParam(defaultValue = "", required = false) List<Long> ids) {
-        List<User> users = userService.findAllById(ids);
+        List<User> users = userService.getAllUsers(ids);
         return requestService.executeEntityResponse(HttpStatus.OK, "The users have been retrieved successfully!", users);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
-        Optional<User> wrappedUser = userService.findById(id);
+        Optional<User> wrappedUser = userService.getUserById(id);
 
         if (wrappedUser.isEmpty()) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "User is undefined!");

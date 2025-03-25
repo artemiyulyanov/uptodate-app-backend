@@ -17,7 +17,7 @@ public abstract class AuthenticatedController {
 
     protected Optional<User> getAuthorizedUser() {
         try {
-            return userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            return userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         } catch (Exception e) {
             return Optional.empty();
         }
