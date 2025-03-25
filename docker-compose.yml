@@ -39,45 +39,6 @@ services:
     networks:
       - app-network
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper
-    restart: always
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - app-network
-
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka
-    restart: always
-    depends_on:
-      - zookeeper
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
-    networks:
-      - app-network
-
-  solr:
-    image: solr:8.11
-    container_name: solr
-    ports:
-      - "8983:8983"
-    networks:
-      - app-network
-    command:
-      - solr-precreate
-      - articles
-
   app:
     build: .
     container_name: spring-boot-app
@@ -85,8 +46,6 @@ services:
       - mysql
       - redis
       - minio
-      - kafka
-      - solr
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/uptodate
       SPRING_DATASOURCE_USERNAME: root
