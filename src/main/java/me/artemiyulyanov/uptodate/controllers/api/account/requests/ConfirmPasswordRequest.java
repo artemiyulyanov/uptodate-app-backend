@@ -10,5 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConfirmPasswordRequest {
-    private String id, password, repeatedPassword;
+    private String password, repeatedPassword;
 }

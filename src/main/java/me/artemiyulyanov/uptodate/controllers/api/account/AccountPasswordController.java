@@ -46,13 +46,16 @@ public class AccountPasswordController extends AuthenticatedController {
         return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email address!");
     }
 
-    @PostMapping("/confirm")
-    public ResponseEntity<?> confirmPassword(@RequestBody ConfirmPasswordRequest request) {
-        if (!mailService.hasMailConfirmationMessage(request.getId())) {
+    @PostMapping("/confirm/{id}")
+    public ResponseEntity<?> confirmPassword(
+            @RequestParam String id,
+            @RequestBody ConfirmPasswordRequest request
+    ) {
+        if (!mailService.hasMailConfirmationMessage(id)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message is not found!");
         }
 
-        MailConfirmationMessage mailConfirmationMessage = mailService.getMailConfirmationMessage(request.getId());
+        MailConfirmationMessage mailConfirmationMessage = mailService.getMailConfirmationMessage(id);
         if (!mailConfirmationMessage.getScope().equals(MailConfirmationMessage.MailScope.PASSWORD_CHANGE)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message id is invalid!");
         }
@@ -61,7 +64,7 @@ public class AccountPasswordController extends AuthenticatedController {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The passwords do not match!");
         }
 
-        mailService.performConfirmationFor(request.getId());
+        mailService.performConfirmationFor(id);
 
         User updatedUser = userService.updatePassword(mailConfirmationMessage.getEmail(), request.getPassword());
         return requestService.executeEntityResponse(HttpStatus.OK, "The password has been updated successfully!", updatedUser);

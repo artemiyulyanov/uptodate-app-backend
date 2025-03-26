@@ -1,7 +1,6 @@
 package me.artemiyulyanov.uptodate.controllers.api.account;
 
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
-import me.artemiyulyanov.uptodate.controllers.api.account.requests.ConfirmEmailRequest;
 import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
 import me.artemiyulyanov.uptodate.mail.MailService;
 import me.artemiyulyanov.uptodate.mail.senders.MailSenderFactory;
@@ -49,15 +48,17 @@ public class AccountEmailController extends AuthenticatedController {
         return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email address!");
     }
 
-    @PostMapping("/confirm")
-    public ResponseEntity<?> confirmEmail(@RequestBody ConfirmEmailRequest request) {
+    @PostMapping("/confirm/{id}")
+    public ResponseEntity<?> confirmEmail(
+            @PathVariable String id
+    ) {
         User user = getAuthorizedUser().get();
 
-        if (!mailService.hasMailConfirmationMessage(request.getId())) {
+        if (!mailService.hasMailConfirmationMessage(id)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message is not found!");
         }
 
-        MailConfirmationMessage mailConfirmationMessage = mailService.getMailConfirmationMessage(request.getId());
+        MailConfirmationMessage mailConfirmationMessage = mailService.getMailConfirmationMessage(id);
         if (!mailConfirmationMessage.getScope().equals(MailConfirmationMessage.MailScope.EMAIL_CHANGE)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message id is invalid!");
         }
@@ -68,7 +69,7 @@ public class AccountEmailController extends AuthenticatedController {
             return requestService.executeApiResponse(HttpStatus.FORBIDDEN, "You are not allowed to confirm this email!");
         }
 
-        mailService.performConfirmationFor(request.getId());
+        mailService.performConfirmationFor(id);
 
         User updatedUser = userService.updateEmail(user, mailConfirmationMessage.getEmail());
         return requestService.executeEntityResponse(HttpStatus.OK, "The email has been updated successfully!", updatedUser);
