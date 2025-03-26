@@ -98,7 +98,7 @@ public class AuthController extends AuthenticatedController {
     }
 
     @PostMapping("/register/confirm")
-    public ResponseEntity<?> registerVerifyCode(@RequestBody RegisterConfirmRequest registerConfirmRequest) {
+    public ResponseEntity<?> registerConfirm(@RequestBody RegisterConfirmRequest registerConfirmRequest) {
         String id = registerConfirmRequest.getId();
 
         if (!mailService.hasMailConfirmationMessage(id)) {
