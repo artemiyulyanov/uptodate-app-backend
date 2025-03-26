@@ -3,7 +3,6 @@ package me.artemiyulyanov.uptodate.controllers.api.auth;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.controllers.api.auth.requests.LoginRequest;
 import me.artemiyulyanov.uptodate.controllers.api.auth.requests.RegisterRequest;
-import me.artemiyulyanov.uptodate.controllers.api.auth.requests.RegisterConfirmRequest;
 import me.artemiyulyanov.uptodate.controllers.api.auth.responses.TokenResponse;
 import me.artemiyulyanov.uptodate.jwt.JWTUtil;
 import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
@@ -97,10 +96,10 @@ public class AuthController extends AuthenticatedController {
         return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email!");
     }
 
-    @PostMapping("/register/confirm")
-    public ResponseEntity<?> registerConfirm(@RequestBody RegisterConfirmRequest registerConfirmRequest) {
-        String id = registerConfirmRequest.getId();
-
+    @PostMapping("/register/confirm/{id}")
+    public ResponseEntity<?> registerConfirm(
+            @PathVariable String id
+    ) {
         if (!mailService.hasMailConfirmationMessage(id)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message is not found!");
         }
