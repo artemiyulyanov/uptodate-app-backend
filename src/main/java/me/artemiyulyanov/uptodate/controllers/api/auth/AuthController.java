@@ -3,10 +3,10 @@ package me.artemiyulyanov.uptodate.controllers.api.auth;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.controllers.api.auth.requests.LoginRequest;
 import me.artemiyulyanov.uptodate.controllers.api.auth.requests.RegisterRequest;
-import me.artemiyulyanov.uptodate.controllers.api.auth.requests.VerifyCodeRequest;
+import me.artemiyulyanov.uptodate.controllers.api.auth.requests.RegisterConfirmRequest;
 import me.artemiyulyanov.uptodate.controllers.api.auth.responses.TokenResponse;
 import me.artemiyulyanov.uptodate.jwt.JWTUtil;
-import me.artemiyulyanov.uptodate.mail.MailConfirmationCode;
+import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
 import me.artemiyulyanov.uptodate.mail.MailService;
 import me.artemiyulyanov.uptodate.mail.senders.MailSenderFactory;
 import me.artemiyulyanov.uptodate.models.User;
@@ -85,31 +85,34 @@ public class AuthController extends AuthenticatedController {
         }
 
         registerRequest.setPassword(password);
-        MailConfirmationCode mailConfirmationCode = mailSenderFactory.createSender(MailConfirmationCode.MailScope.REGISTRATION)
+        MailConfirmationMessage mailConfirmationMessage = mailSenderFactory.createSender(MailConfirmationMessage.MailScope.REGISTRATION)
                 .send(email, List.of(
-                        MailConfirmationCode.Credential
+                        MailConfirmationMessage.Credential
                                 .builder()
                                 .key("registerRequest")
                                 .value(registerRequest)
                                 .build()
                 ));
 
-        return requestService.executeApiResponse(HttpStatus.OK, "The request has been proceeded successfully!");
+        return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email!");
     }
 
-    @PostMapping("/register/verify-code")
-    public ResponseEntity<?> registerVerifyCode(@RequestBody VerifyCodeRequest verifyCodeRequest) {
-        String email = verifyCodeRequest.getEmail();
-        String code = verifyCodeRequest.getCode();
+    @PostMapping("/register/confirm")
+    public ResponseEntity<?> registerVerifyCode(@RequestBody RegisterConfirmRequest registerConfirmRequest) {
+        String id = registerConfirmRequest.getId();
 
-        if (!mailService.validateCode(email, code, MailConfirmationCode.MailScope.REGISTRATION)) {
-            return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The code is invalid!");
+        if (!mailService.hasMailConfirmationMessage(id)) {
+            return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message is not found!");
         }
 
-        MailConfirmationCode mailConfirmationCode = mailService.getConfirmationCode(email);
-        RegisterRequest registerRequest = mailConfirmationCode.getCredential("registerRequest").getValue(RegisterRequest.class);
+        MailConfirmationMessage mailConfirmationMessage = mailService.getMailConfirmationMessage(id);
+        if (!mailConfirmationMessage.getScope().equals(MailConfirmationMessage.MailScope.REGISTRATION)) {
+            return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message id is invalid!");
+        }
 
-        mailService.enterCode(email, code, MailConfirmationCode.MailScope.REGISTRATION);
+        RegisterRequest registerRequest = mailConfirmationMessage.getCredential("registerRequest").getValue(RegisterRequest.class);
+        mailService.performConfirmationFor(id);
+
         User user = userService.createUser(registerRequest.getEmail(), registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getFirstName(), registerRequest.getLastName());
 
         UserDetails userDetails = userService.loadUserByUsername(user.getUsername());
@@ -121,24 +124,6 @@ public class AuthController extends AuthenticatedController {
                         .status(HttpStatus.ACCEPTED.value())
                         .access_token(accessToken)
                         .refresh_token(refreshToken)
-                        .build()
-        );
-    }
-
-    @GetMapping("/refresh")
-    public ResponseEntity<?> refresh(@RequestParam String refreshToken) {
-        if (!jwtUtil.isTokenValid(refreshToken) || !jwtUtil.extractScope(refreshToken).equalsIgnoreCase("REFRESH")) {
-            return requestService.executeApiResponse(HttpStatus.CONFLICT, "Refresh token is invalid!");
-        }
-
-        String username = jwtUtil.extractUsername(refreshToken);
-        UserDetails userDetails = userService.loadUserByUsername(username);
-
-        String accessToken = jwtUtil.generateAccessToken(userDetails);
-        return requestService.executeCustomResponse(
-                TokenResponse.builder()
-                        .status(HttpStatus.OK.value())
-                        .access_token(accessToken)
                         .build()
         );
     }

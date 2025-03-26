@@ -1,4 +1,4 @@
-package me.artemiyulyanov.uptodate.controllers.api.auth.requests;
+package me.artemiyulyanov.uptodate.controllers.api.account.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VerifyCodeRequest {
-    private String email, code;
+public class ConfirmPasswordRequest {
+    private String id, password, repeatedPassword;
 }

@@ -1,6 +1,8 @@
 package me.artemiyulyanov.uptodate.configuration;
 
-import me.artemiyulyanov.uptodate.mail.MailConfirmationCode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -10,9 +12,12 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class RedisConfig {
+//    @Autowired
+//    private ObjectMapper objectMapper;
+
     @Bean
-    public RedisTemplate<String, MailConfirmationCode> mailConfirmationCodeRedisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, MailConfirmationCode> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<String, MailConfirmationMessage> mailConfirmationCodeRedisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, MailConfirmationMessage> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());

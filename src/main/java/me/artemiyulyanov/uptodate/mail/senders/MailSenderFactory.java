@@ -1,11 +1,10 @@
 package me.artemiyulyanov.uptodate.mail.senders;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import me.artemiyulyanov.uptodate.mail.MailCache;
-import me.artemiyulyanov.uptodate.mail.MailConfirmationCode;
+import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
 import me.artemiyulyanov.uptodate.mail.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
@@ -20,28 +19,43 @@ public class MailSenderFactory {
     @Autowired
     private MailCache mailCache;
 
-    public MailSender createSender(MailConfirmationCode.MailScope scope) {
-        if (scope == MailConfirmationCode.MailScope.REGISTRATION) {
+    @Autowired
+    @Qualifier("registrationMailMessageUrl")
+    private String registrationMailMessageUrl;
+
+    @Autowired
+    @Qualifier("changeEmailMailMessageUrl")
+    private String changeEmailMailMessageUrl;
+
+    @Autowired
+    @Qualifier("changePasswordMailMessageUrl")
+    private String changePasswordMailMessageUrl;
+
+    public MailSender createSender(MailConfirmationMessage.MailScope scope) {
+        if (scope == MailConfirmationMessage.MailScope.REGISTRATION) {
             return RegistrationMailSender.builder()
                     .javaMailSender(javaMailSender)
                     .mailService(mailService)
                     .mailCache(mailCache)
+                    .registrationMailMessageUrl(registrationMailMessageUrl)
                     .build();
         }
 
-        if (scope == MailConfirmationCode.MailScope.EMAIL_CHANGE) {
+        if (scope == MailConfirmationMessage.MailScope.EMAIL_CHANGE) {
             return ChangeEmailMailSender.builder()
                     .javaMailSender(javaMailSender)
                     .mailService(mailService)
                     .mailCache(mailCache)
+                    .changeEmailMailMessageUrl(changeEmailMailMessageUrl)
                     .build();
         }
 
-        if (scope == MailConfirmationCode.MailScope.PASSWORD_CHANGE) {
+        if (scope == MailConfirmationMessage.MailScope.PASSWORD_CHANGE) {
             return ChangePasswordMailSender.builder()
                     .javaMailSender(javaMailSender)
                     .mailService(mailService)
                     .mailCache(mailCache)
+                    .changePasswordMailMessageUrl(changePasswordMailMessageUrl)
                     .build();
         }
 

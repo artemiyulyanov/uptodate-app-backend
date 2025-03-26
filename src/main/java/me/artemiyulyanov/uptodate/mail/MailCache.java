@@ -12,25 +12,25 @@ public class MailCache {
     public static final Duration MAIL_CODE_EXPIRATION = Duration.ofMinutes(15);
 
     @Autowired
-    private RedisTemplate<String, MailConfirmationCode> confirmationCodes;
+    private RedisTemplate<String, MailConfirmationMessage> mailConfirmationMessages;
 
-    public MailConfirmationCode getMailConfirmationCode(String email) {
-        return confirmationCodes.opsForValue().get(email);
+    public MailConfirmationMessage getMailConfirmationMessages(String id) {
+        return mailConfirmationMessages.opsForValue().get(id);
     }
 
-    public void setMailConfirmationCode(String email, MailConfirmationCode confirmationCode) {
-        confirmationCodes.opsForValue().set(email, confirmationCode, MAIL_CODE_EXPIRATION);
+    public void addMailConfirmationMessage(MailConfirmationMessage confirmationCode) {
+        mailConfirmationMessages.opsForValue().set(confirmationCode.getId(), confirmationCode, MAIL_CODE_EXPIRATION);
     }
 
-    public void deleteConfirmationCode(String email) {
-        confirmationCodes.delete(email);
+    public void deleteMailConfirmationMessage(String id) {
+        mailConfirmationMessages.delete(id);
     }
 
-    public boolean hasConfirmationCodesFor(String email) {
-        return Boolean.TRUE.equals(confirmationCodes.hasKey(email));
+    public boolean hasMailConfirmationMessage(String id) {
+        return Boolean.TRUE.equals(mailConfirmationMessages.hasKey(id));
     }
 
-    public boolean hasConfirmationCode(String email, MailConfirmationCode.MailScope scope) {
-        return hasConfirmationCodesFor(email) && Objects.requireNonNull(getMailConfirmationCode(email)).getScope().equals(scope);
-    }
+//    public boolean hasMailConfirmationMessage(String email, MailConfirmationMessage.MailScope scope) {
+//        return hasConfirmationCodesFor(email) && Objects.requireNonNull(getMailConfirmationCode(email)).getScope().equals(scope);
+//    }
 }

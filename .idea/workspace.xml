@@ -4,8 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="refactor: methods names updated">
+    <list default="true" id="601abb2a-9191-458a-8af0-e9aa44eabb30" name="Changes" comment="refactor: Slf4j-related annotations removed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/JsonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/MailConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/requests/ConfirmEmailRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/requests/ConfirmPasswordRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/JpaConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountEmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/account/AccountPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/auth/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/auth/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/auth/requests/VerifyCodeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/controllers/api/auth/requests/RegisterConfirmRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/MailCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/MailCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/MailConfirmationCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/MailConfirmationMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/MailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/ChangeEmailMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/ChangeEmailMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/ChangePasswordMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/ChangePasswordMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/MailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/MailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/MailSenderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/MailSenderFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/RegistrationMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/mail/senders/RegistrationMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/MinioConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/configuration/MinioConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/MinioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/minio/MinioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/text/TranslativeString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/models/text/TranslativeString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/web/RequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/artemiyulyanov/uptodate/web/RequestService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +103,7 @@
       <recent name="C:\Users\Artemii\IdeaProjects\Uptodate\src\test" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="me.artemiyulyanov.uptodate.controllers.api.account.requests" />
       <recent name="me.artemiyulyanov.uptodate.mail.senders" />
     </key>
   </component>
@@ -251,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742941918082</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refactor: Slf4j-related annotations removed">
+      <option name="closed" value="true" />
+      <created>1742943213490</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1742943213491</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,6 +307,7 @@
     <MESSAGE value="feat: password updating logic changed" />
     <MESSAGE value="refactor: non-used DI-objects deleted" />
     <MESSAGE value="refactor: methods names updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: methods names updated" />
+    <MESSAGE value="refactor: Slf4j-related annotations removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: Slf4j-related annotations removed" />
   </component>
 </project>

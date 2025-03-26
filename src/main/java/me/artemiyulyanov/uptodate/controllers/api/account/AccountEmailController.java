@@ -1,7 +1,8 @@
 package me.artemiyulyanov.uptodate.controllers.api.account;
 
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
-import me.artemiyulyanov.uptodate.mail.MailConfirmationCode;
+import me.artemiyulyanov.uptodate.controllers.api.account.requests.ConfirmEmailRequest;
+import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
 import me.artemiyulyanov.uptodate.mail.MailService;
 import me.artemiyulyanov.uptodate.mail.senders.MailSenderFactory;
 import me.artemiyulyanov.uptodate.models.User;
@@ -37,37 +38,39 @@ public class AccountEmailController extends AuthenticatedController {
             return requestService.executeApiResponse(HttpStatus.CONFLICT, "The email is already taken!");
         }
 
-        MailConfirmationCode mailConfirmationCode = mailSenderFactory.createSender(MailConfirmationCode.MailScope.EMAIL_CHANGE)
+        MailConfirmationMessage mailConfirmationMessage = mailSenderFactory.createSender(MailConfirmationMessage.MailScope.EMAIL_CHANGE)
                 .send(email, List.of(
-                        MailConfirmationCode.Credential
+                        MailConfirmationMessage.Credential
                                 .builder()
                                 .key("userId")
                                 .value(user.getId())
                                 .build()
                 ));
-        return requestService.executeApiResponse(HttpStatus.OK, "The code has been sent to your email address!");
+        return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email address!");
     }
 
-    @PostMapping
-    public ResponseEntity<?> confirmEmail(
-            @RequestParam String email,
-            @RequestParam String code) {
+    @PostMapping("/confirm")
+    public ResponseEntity<?> confirmEmail(@RequestBody ConfirmEmailRequest request) {
         User user = getAuthorizedUser().get();
 
-        if (!mailService.validateCode(email, code, MailConfirmationCode.MailScope.EMAIL_CHANGE)) {
-            return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The code is invalid!");
+        if (!mailService.hasMailConfirmationMessage(request.getId())) {
+            return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message is not found!");
         }
 
-        MailConfirmationCode mailConfirmationCode = mailService.getConfirmationCode(email);
-        Long userToChangeEmailId = mailConfirmationCode.getCredential("userId").getValue(Long.class);
+        MailConfirmationMessage mailConfirmationMessage = mailService.getMailConfirmationMessage(request.getId());
+        if (!mailConfirmationMessage.getScope().equals(MailConfirmationMessage.MailScope.EMAIL_CHANGE)) {
+            return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message id is invalid!");
+        }
+
+        Long userToChangeEmailId = mailConfirmationMessage.getCredential("userId").getValue(Long.class);
 
         if (!userToChangeEmailId.equals(user.getId())) {
             return requestService.executeApiResponse(HttpStatus.FORBIDDEN, "You are not allowed to confirm this email!");
         }
 
-        mailService.enterCode(email, code, MailConfirmationCode.MailScope.EMAIL_CHANGE);
+        mailService.performConfirmationFor(request.getId());
 
-        User updatedUser = userService.updateEmail(user, email);
+        User updatedUser = userService.updateEmail(user, mailConfirmationMessage.getEmail());
         return requestService.executeEntityResponse(HttpStatus.OK, "The email has been updated successfully!", updatedUser);
     }
 }

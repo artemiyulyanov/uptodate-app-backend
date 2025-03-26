@@ -1,4 +1,4 @@
-package me.artemiyulyanov.uptodate.minio;
+package me.artemiyulyanov.uptodate.configuration;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -41,7 +41,7 @@ public class MinioConfig {
                 .build();
     }
 
-    @Bean
+    @Bean(name = "bucket")
     public String bucket() {
         return bucket;
     }

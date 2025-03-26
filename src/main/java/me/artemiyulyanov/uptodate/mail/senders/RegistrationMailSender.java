@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import me.artemiyulyanov.uptodate.mail.MailCache;
-import me.artemiyulyanov.uptodate.mail.MailConfirmationCode;
+import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
 import me.artemiyulyanov.uptodate.mail.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,31 +22,28 @@ import java.util.List;
 @AllArgsConstructor
 @Component
 public class RegistrationMailSender implements MailSender {
-    @Autowired
     private JavaMailSender javaMailSender;
-
-    @Autowired
     private MailService mailService;
-
-    @Autowired
     private MailCache mailCache;
+    private String registrationMailMessageUrl;
 
     @Override
-    public MailConfirmationCode send(String email, List<MailConfirmationCode.Credential> credentials) {
-        MailConfirmationCode confirmationCode = MailConfirmationCode.builder()
+    public MailConfirmationMessage send(String email, List<MailConfirmationMessage.Credential> credentials) {
+        MailConfirmationMessage mailConfirmationMessage = MailConfirmationMessage.builder()
+                .id(MailConfirmationMessage.generateConfirmationMessageId())
                 .email(email)
-                .code(Integer.toString(mailService.generateRandomCode()))
                 .credentials(credentials)
-                .scope(MailConfirmationCode.MailScope.REGISTRATION)
+//                .sentAt(LocalDateTime.now())
+                .scope(MailConfirmationMessage.MailScope.REGISTRATION)
                 .build();
-        mailCache.setMailConfirmationCode(email, confirmationCode);
+        mailCache.addMailConfirmationMessage(mailConfirmationMessage);
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setSubject("Confirmation code");
-        message.setText(String.format("Hi! Your confirmation code is: %s. Enter it to get authenticated", confirmationCode.getCode()));
+        message.setSubject("Confirmation link");
+        message.setText(String.format("Hi! Follow this confirmation link to finish your registration: %s", registrationMailMessageUrl + mailConfirmationMessage.getId()));
         javaMailSender.send(message);
 
-        return confirmationCode;
+        return mailConfirmationMessage;
     }
 }

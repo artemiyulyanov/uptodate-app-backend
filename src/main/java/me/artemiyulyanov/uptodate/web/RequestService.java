@@ -3,6 +3,7 @@ package me.artemiyulyanov.uptodate.web;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -19,18 +20,12 @@ import java.util.Map;
 
 @Service
 public class RequestService {
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.findAndRegisterModules();
-
-        return objectMapper;
-    }
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public String mapToJson(Map<String, Object> params) {
         try {
-            return objectMapper().writeValueAsString(params);
+            return objectMapper.writeValueAsString(params);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;

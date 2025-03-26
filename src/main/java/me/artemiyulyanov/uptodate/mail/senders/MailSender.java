@@ -1,12 +1,11 @@
 package me.artemiyulyanov.uptodate.mail.senders;
 
-import lombok.*;
-import me.artemiyulyanov.uptodate.mail.MailConfirmationCode;
+import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public interface MailSender {
-    MailConfirmationCode send(String email, List<MailConfirmationCode.Credential> credentials);
+    MailConfirmationMessage send(String email, List<MailConfirmationMessage.Credential> credentials);
 }
