@@ -2,9 +2,12 @@
 
 ## Stack
 - **REST API:** Spring Framework: Boot, Security, JPA
+- **DI (Dependency Injection):** Spring Beans
 - **Cloud Technologies:** AWS, MinIO
+- **Database**: MySQL
 - **Text parsing (JSON2Plain):** FasterXML
 - **Utilities:** Lombok
+- **Deployment:** Docker, Docker Compose
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file or the full text at [MIT License](https://opensource.org/licenses/MIT) for details.
