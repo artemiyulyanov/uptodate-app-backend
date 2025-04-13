@@ -42,7 +42,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Kind of an error occured");
+            System.out.println("Unable to process authentication at the middleware level");
         }
 
         filterChain.doFilter(request, response);
