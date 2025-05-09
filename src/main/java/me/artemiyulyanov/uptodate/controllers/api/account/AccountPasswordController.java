@@ -1,5 +1,10 @@
 package me.artemiyulyanov.uptodate.controllers.api.account;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.controllers.api.account.requests.ConfirmPasswordRequest;
 import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
@@ -20,6 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/account/password")
+@Tag(name = "Account Password", description = "Endpoints to interact with account's password")
 public class AccountPasswordController extends AuthenticatedController {
     @Autowired
     private UserService userService;
@@ -33,9 +39,16 @@ public class AccountPasswordController extends AuthenticatedController {
     @Autowired
     private MailSenderFactory mailSenderFactory;
 
-    @PatchMapping
+    @Operation(summary = "Resets password", description = "Sends a link to reset password")
+    @ApiResponses({
+            @ApiResponse(responseCode = "400", description = "The user is not found!"),
+            @ApiResponse(responseCode = "200", description = "The link has been sent to your email address!")
+    })
+    @PostMapping
     public ResponseEntity<?> editPassword(
-            @RequestParam String email
+            @Parameter(name = "The email of user", description = "Requires because the user may be unauthorized")
+            @RequestParam
+            String email
     ) {
         if (!userService.existsByEmail(email)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The user is not found by such email!");
@@ -43,13 +56,21 @@ public class AccountPasswordController extends AuthenticatedController {
 
         MailConfirmationMessage mailConfirmationMessage = mailSenderFactory.createSender(MailConfirmationMessage.MailScope.PASSWORD_CHANGE)
                 .send(email, Collections.emptyList());
-        return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email address!");
+        return requestService.executeApiResponse(HttpStatus.OK, "The link has been sent to your email address!");
     }
 
-    @PostMapping("/confirm/{id}")
+    @Operation(summary = "Confirms and sets up a new password")
+    @ApiResponses({
+            @ApiResponse(responseCode = "400", description = "Error to process the data"),
+            @ApiResponse(responseCode = "200", description = "The password has been changed successfully!")
+    })
+    @PatchMapping("/confirm/{id}")
     public ResponseEntity<?> confirmPassword(
-            @RequestParam String id,
-            @RequestBody ConfirmPasswordRequest request
+            @Parameter(name = "The ID of link")
+            @RequestParam
+            String id,
+            @RequestBody
+            ConfirmPasswordRequest request
     ) {
         if (!mailService.hasMailConfirmationMessage(id)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message is not found!");

@@ -16,14 +16,6 @@ public class MailConfig {
     @Value("${mail.links.change-email.url}")
     private String changeEmailMessageUrl;
 
-    @PostConstruct
-    public void test() {
-        System.out.println("links data");
-        System.out.println(registrationMessageUrl);
-        System.out.println(changeEmailMessageUrl);
-        System.out.println(changePasswordMessageUrl);
-    }
-
     @Bean(name = "registrationMailMessageUrl")
     public String registrationMailMessageUrl() {
         return registrationMessageUrl;

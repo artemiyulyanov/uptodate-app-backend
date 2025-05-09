@@ -1,5 +1,11 @@
 package me.artemiyulyanov.uptodate.controllers.api.account;
 
+import io.lettuce.core.dynamic.annotation.Param;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.mail.MailConfirmationMessage;
 import me.artemiyulyanov.uptodate.mail.MailService;
@@ -16,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/account/email")
+@Tag(name = "Account Email", description = "Endpoints to interact with account's email")
 public class AccountEmailController extends AuthenticatedController {
     @Autowired
     private UserService userService;
@@ -29,8 +36,18 @@ public class AccountEmailController extends AuthenticatedController {
     @Autowired
     private MailSenderFactory mailSenderFactory;
 
+    @Operation(summary = "Changes email")
+    @ApiResponses({
+            @ApiResponse(responseCode = "401", description = "The user is unauthorized!"),
+            @ApiResponse(responseCode = "409", description = "The email is already taken!"),
+            @ApiResponse(responseCode = "200", description = "The confirmation link has been sent to your email!")
+    })
     @PatchMapping
-    public ResponseEntity<?> editEmail(@RequestParam String email) {
+    public ResponseEntity<?> editEmail(
+            @Parameter(name = "A new email")
+            @RequestParam
+            String email
+    ) {
         User user = getAuthorizedUser().get();
 
         if (!userService.getConflictedColumnsWhileEditing(user, email, user.getUsername()).isEmpty()) {
@@ -48,9 +65,18 @@ public class AccountEmailController extends AuthenticatedController {
         return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email address!");
     }
 
+    @Operation(summary = "Confirms email")
+    @ApiResponses({
+            @ApiResponse(responseCode = "400", description = "The confirmation link is not found!"),
+            @ApiResponse(responseCode = "401", description = "The user is unauthorized!"),
+            @ApiResponse(responseCode = "403", description = "The user is not allowed to confirm this email"),
+            @ApiResponse(responseCode = "200", description = "The email has been confirmed successfully!")
+    })
     @PostMapping("/confirm/{id}")
     public ResponseEntity<?> confirmEmail(
-            @PathVariable String id
+            @Parameter(name = "The ID of link")
+            @PathVariable
+            String id
     ) {
         User user = getAuthorizedUser().get();
 

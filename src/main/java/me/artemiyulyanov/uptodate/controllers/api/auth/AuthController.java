@@ -1,5 +1,11 @@
 package me.artemiyulyanov.uptodate.controllers.api.auth;
 
+import io.lettuce.core.dynamic.annotation.Param;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.controllers.api.auth.requests.LoginRequest;
 import me.artemiyulyanov.uptodate.controllers.api.auth.requests.RegisterRequest;
@@ -25,6 +31,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Auth", description = "Endpoints to proceed authentication requests")
 public class AuthController extends AuthenticatedController {
     @Autowired
     private UserService userService;
@@ -47,6 +54,11 @@ public class AuthController extends AuthenticatedController {
     @Autowired
     private MailSenderFactory mailSenderFactory;
 
+    @Operation(summary = "Gets user logged in")
+    @ApiResponses({
+            @ApiResponse(responseCode = "401", description = "The user is invalid!"),
+            @ApiResponse(responseCode = "200", description = "The user has been signed in successfully!")
+    })
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
@@ -73,6 +85,11 @@ public class AuthController extends AuthenticatedController {
         );
     }
 
+    @Operation(summary = "Signs up a new user", description = "The initial step to be confirmed with a confirmation link")
+    @ApiResponses({
+            @ApiResponse(responseCode = "409", description = "User already exists!"),
+            @ApiResponse(responseCode = "200", description = "The confirmation link has been sent successfully!")
+    })
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
         String username = registerRequest.getUsername();
@@ -96,9 +113,17 @@ public class AuthController extends AuthenticatedController {
         return requestService.executeApiResponse(HttpStatus.OK, "The confirmation link has been sent to your email!");
     }
 
+    @Operation(summary = "Confirms an expected user to be signed up")
+    @ApiResponses({
+            @ApiResponse(responseCode = "401", description = "The confirmation link is invalid or not found!"),
+            @ApiResponse(responseCode = "417", description = "The registration is not managed!"),
+            @ApiResponse(responseCode = "202", description = "The user has been confirmed and signed up successfully!")
+    })
     @PostMapping("/register/confirm/{id}")
     public ResponseEntity<?> registerConfirm(
-            @PathVariable String id
+            @Parameter(name = "The ID of confirmation link")
+            @PathVariable
+            String id
     ) {
         if (!mailService.hasMailConfirmationMessage(id)) {
             return requestService.executeApiResponse(HttpStatus.BAD_REQUEST, "The confirmation message is not found!");
@@ -113,6 +138,9 @@ public class AuthController extends AuthenticatedController {
         mailService.performConfirmationFor(id);
 
         User user = userService.createUser(registerRequest.getEmail(), registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getFirstName(), registerRequest.getLastName());
+        if (user == null) {
+            return requestService.executeApiResponse(HttpStatus.EXPECTATION_FAILED, "The registration has been failed!");
+        }
 
         UserDetails userDetails = userService.loadUserByUsername(user.getUsername());
         String accessToken = jwtUtil.generateAccessToken(userDetails);

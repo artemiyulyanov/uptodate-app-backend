@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.models.Article;
 import me.artemiyulyanov.uptodate.models.User;
@@ -27,6 +29,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+@Tag(name = "Users", description = "Endpoints to interact with users")
 public class UserController extends AuthenticatedController {
     @Autowired
     private UserService userService;
@@ -34,14 +37,31 @@ public class UserController extends AuthenticatedController {
     @Autowired
     private RequestService requestService;
 
+    @Operation(summary = "Gets users by their IDs")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "The users have been retrieved successfully!")
+    })
     @GetMapping
-    public ResponseEntity<?> getUsersByIds(@RequestParam(defaultValue = "", required = false) List<Long> ids) {
+    public ResponseEntity<?> getUsersByIds(
+            @Parameter(name = "The IDs of users to be found")
+            @RequestParam(defaultValue = "", required = false)
+            List<Long> ids
+    ) {
         List<User> users = userService.getAllUsers(ids);
         return requestService.executeEntityResponse(HttpStatus.OK, "The users have been retrieved successfully!", users);
     }
 
+    @Operation(summary = "Gets an user")
+    @ApiResponses({
+            @ApiResponse(responseCode = "400", description = "The user is not found!"),
+            @ApiResponse(responseCode = "200", description = "The user has been retrieved successfully!")
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+    public ResponseEntity<?> getUserById(
+            @Parameter(name = "The ID of user to be found")
+            @PathVariable
+            Long id
+    ) {
         Optional<User> wrappedUser = userService.getUserById(id);
 
         if (wrappedUser.isEmpty()) {
