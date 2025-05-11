@@ -156,7 +156,7 @@ public class ArticleController extends AuthenticatedController {
             @RequestParam
             List<String> topicsNames,
             @Parameter(description = "The cover of article")
-            @RequestParam
+            @RequestParam(required = false)
             MultipartFile cover,
             @Parameter(description = "The additional resources of article (e.g. images)")
             @RequestParam(required = false)

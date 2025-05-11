@@ -46,21 +46,21 @@ public class UserService implements UserDetailsService, ResourceService<UserReso
     @Lazy
     private PasswordEncoder passwordEncoder;
 
-    @PostConstruct
-    public void init() {
-        if (userRepository.count() > 0) return;
-
-        User testUser = User.builder()
-                .username("Artemiy")
-                .email("artemij.honor@gmail.com")
-                .firstName("Artemiy")
-                .lastName("Ulyanov")
-                .password(passwordEncoder.encode("HelloBro31"))
-                .roles(Set.of(roleService.findRoleByName("USER").orElse(null), roleService.findRoleByName("ADMIN").orElse(null)))
-                .build();
-
-        userRepository.save(testUser);
-    }
+//    @PostConstruct
+//    public void init() {
+//        if (userRepository.count() > 0) return;
+//
+//        User testUser = User.builder()
+//                .username("Artemiy")
+//                .email("artemij.honor@gmail.com")
+//                .firstName("Artemiy")
+//                .lastName("Ulyanov")
+//                .password(passwordEncoder.encode("HelloBro31"))
+//                .roles(Set.of(roleService.findRoleByName("USER").orElse(null), roleService.findRoleByName("ADMIN").orElse(null)))
+//                .build();
+//
+//        userRepository.save(testUser);
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
