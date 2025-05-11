@@ -264,10 +264,10 @@ public class ArticleController extends AuthenticatedController {
             @RequestParam(required = false)
             Integer pages,
             @Parameter(description = "Search query (applies to heading, content, description, author etc.)")
-            @RequestParam
+            @RequestParam(defaultValue = "")
             String query,
             @Parameter(description = "Search filters (required as a json)")
-            @RequestParam(value = "filters")
+            @RequestParam(value = "filters", defaultValue = "[]")
             String filtersRow
     ) throws JsonProcessingException, UnsupportedEncodingException {
         HashMap<String, Object> filters = objectMapper.readValue(URLDecoder.decode(filtersRow, "UTF-8"), new TypeReference<>() {});
