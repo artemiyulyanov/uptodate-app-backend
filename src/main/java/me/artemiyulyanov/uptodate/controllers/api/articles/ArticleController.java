@@ -267,7 +267,7 @@ public class ArticleController extends AuthenticatedController {
             @RequestParam(defaultValue = "", required = false)
             String query,
             @Parameter(description = "Search filters (required as a json)")
-            @RequestParam(value = "filters", defaultValue = "[]", required = false)
+            @RequestParam(value = "filters", defaultValue = "{}", required = false)
             String filtersRow
     ) throws JsonProcessingException, UnsupportedEncodingException {
         HashMap<String, Object> filters = objectMapper.readValue(URLDecoder.decode(filtersRow, "UTF-8"), new TypeReference<>() {});
