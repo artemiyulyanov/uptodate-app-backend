@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.controllers.api.account.responses.ChangesAvailableResponse;
@@ -37,6 +38,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/account")
+@SecurityRequirement(name = "bearerAuth")
 @Tag(name = "Account", description = "Endpoints to interact with authenticated user")
 public class AccountController extends AuthenticatedController {
     @Autowired

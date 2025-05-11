@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.links.LinkParameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import me.artemiyulyanov.uptodate.controllers.AuthenticatedController;
 import me.artemiyulyanov.uptodate.controllers.api.articles.filters.ArticleFilter;
@@ -119,6 +120,7 @@ public class ArticleController extends AuthenticatedController {
             @ApiResponse(responseCode = "401", description = "The user is unauthorized!"),
             @ApiResponse(responseCode = "200", description = "The article has been liked/unliked successfully!")
     })
+    @SecurityRequirement(name = "bearerAuth")
     @PatchMapping("/{id}/like")
     public ResponseEntity<?> likeArticle(
             @Parameter(description = "The ID of article to be liked/unliked")
@@ -141,6 +143,7 @@ public class ArticleController extends AuthenticatedController {
             @ApiResponse(responseCode = "401", description = "The user is unauthorized!"),
             @ApiResponse(responseCode = "200", description = "The article has been created successfully!")
     })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping
     public ResponseEntity<?> createArticle(
             @Parameter(description = "The heading of article")
@@ -183,6 +186,7 @@ public class ArticleController extends AuthenticatedController {
             @ApiResponse(responseCode = "401", description = "The user is unauthorized!"),
             @ApiResponse(responseCode = "200", description = "The article has been created successfully!")
     })
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{id}")
     public ResponseEntity<?> editArticle(
             @Parameter(description = "The ID of article")
@@ -233,6 +237,7 @@ public class ArticleController extends AuthenticatedController {
             @ApiResponse(responseCode = "401", description = "The user is unauthorized!"),
             @ApiResponse(responseCode = "200", description = "The article has been created successfully!")
     })
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteArticle(@PathVariable Long id) {
         Optional<User> wrappedUser = getAuthorizedUser();
